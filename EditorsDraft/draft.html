@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>OpenActive Club Specification</title>
+    <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
+    <script class="remove">
+        // All config options at https://respec.org/docs/
+        var respecConfig = {
+            //Document Status
+            specStatus: "unofficial",
+            //Suppress previous version with this line (for new drafts)
+            latestVersion: null,
+            //Editors
+            editors: [{
+                name: "Howard Askew", url: "https://theodi.org/person/howard-askew",
+                company: "Open Data Institute", companyURL: "http://opendata.institute/",
+                w3cid: 138948
+            }],
+            //github: "openactive/modelling-opportunity-data/issues/313",
+            shortName: "clubs",
+            xref: "web-platform",
+            format: "markdown",
+            // name of the WG
+            wg: "OpenActive Community Group",
+            // URI of the public WG page
+            wgURI: "https://www.w3.org/community/openactive/",
+            logos: [{
+                src: 'https://www.openactive.io/assets/openactive-logo-small.png',
+                url: "https://www.openactive.io",
+                alt: "openactive.io",
+                width: 262,
+                height: 44,
+                id: 'oa-logo'
+            }],
+            localBiblio: {
+                "JSON-LD": {
+                    "href": "https://www.w3.org/TR/json-ld/",
+                    "title": "JSON-LD 1.0",
+                    "status": "REC",
+                    "publisher": "W3C",
+                },
+                "SCHEMA-ORG": {
+                    "href": "https://schema.org/",
+                    "title": "Schema.org"
+                },
+                "SKOS": {
+                    "href": "https://www.w3.org/TR/skos-primer",
+                    "title": "SKOS Simple Knowledge Organization System Primer",
+                    "status": "NOTE",
+                    "publisher": "W3C",
+                },
+                "BasicGeo": {
+                    "href": "https://www.w3.org/2003/01/geo/",
+                    "title": "W3C Semantic Web Interest Group: Basic Geo",
+                    "publisher": "SWIG"
+                },
+                "Publishing-Opportunity-Data": {
+                    "href": "https://www.openactive.io/opportunity-data-primer/",
+                    "title": "Publishing Opportunity Data: A Primer",
+                    "publisher": "OpenActive Community Group",
+                },
+                "OpenActive-Beta-Namespace": {
+                    "href": "https://www.openactive.io/ns-beta/",
+                    "title": "OpenActive Beta Namespace",
+                    "publisher": "OpenActive Community Group",
+                },
+                "OpenActive-Vocabulary": {
+                    "href": "https://www.openactive.io/ns/",
+                    "title": "OpenActive Vocabulary",
+                    "publisher": "OpenActive Community Group",
+                },
+                "OpenActive-Activity-List": {
+                    "href": "https://openactive.io/activity-list",
+                    "title": "OpenActive Activity List",
+                    "publisher": "OpenActive Community Group",
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+<section id="abstract">
+This specification describes a simple data specification to support the standardised publication of
+organisation or club data. It aligns with the OpenActive data model for opportunities for people to engage
+in physical activities ("opportunity data"), which includes description of activities, as well as the events
+and locations in which they take place.
+
+OpenActive specifications are intended to support the publication of opportunity data as open data for
+anyone to access, use and share. This specification is ideal for those new to publishing open data that are
+not in a position to publish individual dated and timed events or facility slots.
+The model may be useful in guiding the development of new and existing systems and applications that consume
+opportunity and organisation or club data.
+
+The specification is an output of the [OpenActive Community Group](http://www.w3.org/community/openactive/)
+
+The data model described in this document has been mapped to existing standards and vocabularies, including
+SKOS and the Schema.org types and properties.
+</section>
+<section id="sotd">
+Contributions to this document are welcomed. Please add any solutions, comments, or improvements you might have via [GitHub](openactive/modelling-opportunity-data/issues/313).
+</section>
+<section>
+## Introduction
+Lack of access to up to date information about opportunities for sport and physical activity is a barrier to getting people active. The OpenActive initiative, as a community of representatives from across the sector, has developed a range of data specifications to address this, using data to help people get active.
+
+In our ideal user experience, a person can readily search online for opportunities nearby, find enough detail to understand if the activity is appropriate for their particular circumstances, then directly reserve a place in a class or book a court or facility.
+
+Feedback from the sector shows:
+
+* Many potential activity providers are not yet able to share open data about their sessions and facilities in such detail.
+* There is demand for information about activity providers (often sports clubs) in a local area.
+* There is no agreed standard, structure or format for sharing such information.
+
+This specification aims to support the sharing of open data about clubs and organisations providing opportunities for activity. By improving consistency in the provision of such data, consumers can have more confidence in data supply and data quality and develop innovative methods to engage potential end-users.
+
+The original [OpenActive Opportunity data model](https://openactive.io/modelling-opportunity-data/) was centered around Events. This specification is based on the following pattern or profile of elements from that model:
+
+![Club data model](images/Club%20data%20model%20v0.1.png)
+
+**Organization**
+An Organization is a basic entity to represent an organization such as a school, NGO, corporation, club, etc. Relevant organization subclasses here include (but are not limited to):
+
+* SportsClub ([https://schema.org/SportsClub](https://schema.org/SportsClub))
+* SportsOrganization ([https://schema.org/SportsOrganization](https://schema.org/SportsOrganization))
+
+**Activity**
+OpenActive’s primary focus is physical activity \- any exercise, sport or other form of bodily movement that involves physical effort. The recommended approach is to use the [OpenActive Activity List](https://activity-list.openactive.io/en/hierarchical_concepts.html), based on the [SKOS](https://www.w3.org/TR/skos-primer) standard for publishing controlled vocabularies.
+
+The Activity List describes a set of Physical Activities. An Activity List may be a simple list of activity names, but it can also capture additional information. Examples include alternative names for an activity e.g. "Soccer" is a synonym for "Football". Further, to group activities, we can define "broader" and "narrower" relationships. For example Judo, Karate and Kendo are all more specific examples of the broader activity of "Martial Arts".
+
+**Place**
+This specification uses Place as a general concept to refer to all types of locations, venues and facilities. Recognising that clubs will vary in the number and type of premises they may operate from, the specification allows that this Place can be defined flexibly. Examples here include:
+
+* A head office, administrative base or clubhouse
+* One or more facilities where the activities take place
+</section>
+<section>
+## Formats
+
+Reflecting the wide variety of tools and platforms in use, and also that the sector is at an early stage in sharing its data more widely, this specification does not prescribe specific data formats or APIs. Club data could be published as JSON, CSV, XML or other formats.
+
+That said, in the examples that follow, we use the JSON-LD format and recommend this approach. JSON-LD offers several advantages, including its widespread use in modem web tools, its readability for both humans and machines, and its compatibility with linked data principles. For more details, see [JSON-LD Best Practices](https://w3c.github.io/json-ld-bp/).
+
+The JSON-LD approach is ideally suited for clubs with a website or web page.
+
+OpenActive event data, for sessions and facility slots, are published via the Realtime Paged Data Exchange approach (RPDE).  Alongside this standalone specification, we are proposing an aligned update to the Opportunity Data specification, expanding the representation of organisation/club in the data model, and providing (optional) guidance for publishing club data via RPDE feeds.
+
+This would support ongoing publication of up-to-date information about affiliated clubs from National Governing Bodies, paving the way for the addition of sessions and slots as a club’s data skills and systems evolve.
+</section>
+<section>
+## Data Model
+
+### Describing Organisations
+
+Schema.org’s Organization, SportsClub and SportsOrganization types support a common set of properties to describe the information required:
+
+| Key | Property | Status | Format | Notes |
+| :---- | :---- | :---- | :---- | :---- |
+| name | [schema:name](https://schema.org/name) | REQUIRED | String | The name of the organisation. |
+| description | [schema:description](https://schema.org/description) | Recommended | String | A free text description containing a brief summary of the organisation. |
+| url | [schema:url](https://schema.org/url) | Recommended | String | A URL to the organisation’s website homepage or other page about the organisation. |
+| sameAs | [schema:sameAs](https://schema.org/sameAs) | Recommended | String or array of String | Lists the URL(s) of the official social media profile pages associated with the organisation. |
+| activity | [oa:activity](https://openactive.io/activity) | REQUIRED | Array of [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept) | Specifies one or more physical activities that are provided by the organisation.  |
+| location | [schema:location](https://schema.org/location) | REQUIRED | [schema:Place](https://schema.org/Place) or array of [schema:Place](https://schema.org/Place), [schema: address](https://schema.org/address), String | The main address of the organisation or key locations of the activities provided by the organisation. |
+| email | [schema:email](https://schema.org/email)  | Optional | String | A contact email address for the organisation. |
+| telephone | [schema:telephone](https://schema.org/telephone) | Optional | String | A contact telephone number for the organisation. |
+| logo | [schema:logo](https://schema.org/logo) | Optional | [schema:ImageObject](https://schema.org/ImageObject) | A URL to an image associated with the organisation which can be presented alongside its name. |
+| alternateName | [schema:alternativeName](https://schema.org/alternateName) | Optional | String or array of String | Aliases, common acronyms or alternative names for the organisation.  |
+| genderRestriction | [oa:genderRestriction](https://openactive.io/genderRestriction) | Optional | [oa:GenderRestrictionType](https://openactive.io/GenderRestrictionType) | Indicates that an organisation provides activities that are restricted to Male or Female participants, or that there are no restrictions. 3  values are defined as URIs however see [related discussion](https://github.com/openactive/modelling-opportunity-data/issues/69%20).  |
+| ageRange | [oa:ageRange](https://openactive.io/ageRange) | Optional | [schema:QuantitativeValue](https://schema.org/QuantitativeValue) | Indicates that an organisation provides activities suitable for a specific age range. Specified as a [QuantitativeValue](https://schema.org/QuantitativeValue) with [minValue](https://schema.org/minValue) and [maxValue](https://schema.org/maxValue) properties |
+| memberOf | [schema:memberOf](https://schema.org/memberOf) | Optional | String | The Organisation Id for an organisation that this club is affiliated to. For example, a club can link to its National Governing Body. |
+| member | [schema:member](https://schema.org/member) | Optional | String or array of String | The organisation IDs for organisations affiliated to this organisation. For example, a National Governing Body can list its current affiliated clubs. |
+
+### Describing Activities
+
+The [OpenActive Activity List](https://activity-list.openactive.io/en/hierarchical_concepts.html) provides an openly licensed standard activity list that can be used by organisations. It is a controlled vocabulary published using the types and properties defined by the [SKOS](https://www.w3.org/TR/skos-primer/) standard. That standard allows:
+
+* activities to be organised into hierarchies to capture broader-narrow relationships, e.g. "Martial Arts" and "Judo"
+* sharing of alternative labels to support search and indexing
+* the sharing of standard codes to support data integration
+
+If you would like to propose additions or improvements to the list please use this [form](https://docs.google.com/forms/d/e/1FAIpQLSfaKgMC-dySy8G7Lvv_9Uh-o48Db37B3BwHSHANyPlEpiEmFA/viewform).
+
+The following properties from the [SKOS](https://openactive.io/modelling-opportunity-data/#bib-SKOS) specification can be used to describe physical activities.
+
+| Key | Property | Status | Format | Notes |
+| :---- | :---- | :---- | :---- | :---- |
+| prefLabel | [skos:prefLabel](https://www.w3.org/2009/08/skos-reference/skos.html#prefLabel) | REQUIRED | String | Preferred label for the physical activity.  |
+| inScheme | [skos:inScheme](https://www.w3.org/2009/08/skos-reference/skos.html#inScheme) | Recommended | URI | Link to the Activity List in which this physical activity is defined e.g. “[https://openactive.io/activity-list](https://openactive.io/activity-list)” |
+| altLabel | [skos:altLabel](https://www.w3.org/2009/08/skos-reference/skos.html#altLabel) | Optional | Array of String | Alternative labels for the physical activity |
+| broader | [skos:broader](https://www.w3.org/2009/08/skos-reference/skos.html#broader) | Optional | Array of URI | Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a parent or broader term. E.g. "Martial Arts" is broader than "Tai Chi". |
+| narrower | [skos:narrower](https://www.w3.org/2009/08/skos-reference/skos.html#narrower) | Optional | Array of URI | Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a child or narrower term. E.g. "Tai Chi" is a narrower term of "Martial Arts" |
+| notation | [skos:notation](https://www.w3.org/2009/08/skos-reference/skos.html#notation) | Optional | String | Provides a unique code or identifier for an activity |
+
+### Describing Place
+
+The following table lists a number of properties that can be used to describe a place. This includes a number of optional properties from the full OpenActive opportunity data model.
+
+| Key | Property | Status | Format | Notes |
+| :---- | :---- | :---- | :---- | :---- |
+| name | [schema:name](https://schema.org/name) | REQUIRED | String | The name of the Place |
+| address | [schema:address](https://schema.org/address) | Recommended | [schema:PostalAddress](https://schema.org/PostalAddress) or String | The street address of the location, expressed as a [schema:PostalAddress](https://schema.org/PostalAddress). Where possible publishers should specify an address as an object.  |
+| geo | [schema:geo](https://schema.org/geo) | Recommended | [schema:GeoCoordinates](https://schema.org/GeoCoordinates) | The geographic co-ordinates, specified as a latitude and longitude of a Place |
+| description | [schema:description](https://schema.org/description) | Optional | String | A free text description of the Place |
+| image | [schema:image](https://schema.org/image) | Optional | Array of [schema:ImageObject](https://schema.org/ImageObject) | One or more images or photos that depicts the Place |
+| URI | [schema:url](https://schema.org/url) | Optional | URI | A URL to a web page (or section of a page) that describes the Place |
+| identifier | [schema:identifier](https://schema.org/identifier) | Optional | Number, String, [schema:PropertyValue](https://schema.org/PropertyValue) | A local identifier for the resource. |
+| containInPlace | [schema:containedInPlace](https://schema.org/containedInPlace) | Optional | [schema:Place](https://schema.org/Place) | Indicates that this Place is part of a larger location. Can be used to allow, e.g. a pitch or other facility to be related to a parent location such as a Leisure Centre |
+| containsPlace | [schema:containsPlace](https://schema.org/containsPlace) | Optional | Array of [schema:Place](https://schema.org/Place) | Relates a Place to one or more other locations and facilities that it contains. |
+| telephone | [schema:telephone](https://schema.org/telephone) | Optional | String | A contact telephone number for the location, e.g. for enquiries |
+| openingHoursSpecification | [schema:openingHoursSpecification](https://schema.org/openingHoursSpecification) | Optional | Array of [schema:OpeningHoursSpecification](https://schema.org/OpeningHoursSpecification) | Specifies the opening hours of a location.  |
+| amenityFeature | [schema:amenityFeature](https://schema.org/amenityFeature) | Optional | Array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification) | Used to indicate whether specific amenities are available at a location, through an array of [schema:LocationFeatureSpecification](https://schema.org/LocationFeatureSpecification) objects.  |
+
+Schema.org provides the following properties for publishing address data using the [schema:PostalAddress](https://schema.org/PostalAddress) type.
+
+| Key | Property | Status | Format | Notes |
+| :---- | :---- | :---- | :---- | :---- |
+| streetAddress | [schema:streetAddress](https://schema.org/streetAddress) | REQUIRED | String | Street address |
+| addressLocality | [schema:addressLocality](https://schema.org/addressLocality) | REQUIRED | String | Town or other area |
+| addressRegion | [schema:addressRegion](https://schema.org/addressRegion) | REQUIRED | String | Region |
+| postalCode | [schema:postalCode](https://schema.org/postalCode) | REQUIRED | String | Postcode |
+| addressCountry | [schema:addressCountry](https://schema.org/addressCountry) | REQUIRED | String | ISO 3166-1 alpha-2 country code |
+
+A more precise geographical location can be provided for a [schema:Place](https://schema.org/Place) by adding a [schema:geo](https://schema.org/geo) property. The value of this property is a [schema:GeoCoordinates](https://schema.org/GeoCoordinates) object, with the following properties.
+
+| Key | Property | Status | Format | Notes |
+| :---- | :---- | :---- | :---- | :---- |
+| latitude | [schema:latitude](https://schema.org/latitude) | REQUIRED | Number | Latitude |
+| longitude | [schema:longitude](https://schema.org/longitude) | REQUIRED | Number | Longitude |
+
+Latitude and longitude values should be provided to a precision of at least two decimal places in order to be useful to consumers.
+</section>
+<section>
+## Worked Examples
+### How to use this spec to add standardised machine readable data to a club website.
+
+To illustrate the basic concepts and the JSON-LD representation, consider the following examples, adapted from an existing OpenActive opportunity based at a club.
+
+**Example 1: Starting with the simplest example, using required fields only, in their simplest form.**
+(This is for illustrative purposes only and not recommended at all.)
+
+“@context”, “@type” and “@id” are JSON-LD keywords.
+
+The following script could be added at the end of the 'head' tag on the club’s website.
+
+```json-ld
+<script type="application/ld+json">
+{
+    "@context": "https://openactive.io/",
+    "@type": "Organization",
+    "@id": "https://opensessions.io/api/id/organizers/2572",
+    "name": "Greenwich Yacht Club",
+    "activity": [
+        {
+            "@type": "Concept",
+            "prefLabel": "Rowing"
+        }
+    ],
+    "location": "Greenwich Yacht Club, London SE10 0BW, UK"
+}
+</script>
+```
+
+However, using the fuller specification allows us to provide much richer information. As this is done consistently between data publishers, data consumers can collate the information more easily.
+
+**Example 2: Using the REQUIRED and Recommended fields, in their recommended forms**
+```json-ld
+<script type="application/ld+json">
+{
+    "@context": "https://openactive.io/",
+    "@type": "Organization",
+    "@id": "https://opensessions.io/api/id/organizers/2572",
+    "name": "Greenwich Yacht Club",
+    "description": "Community amateur sports club focused on getting people sailing.",
+    "url": "http://www.greenwichyachtclub.co.uk",
+    "sameAs": [
+        "http://www.greenwichyachtclub.co.uk",
+        "https://www.facebook.com/GreenwichYachtClub/",
+        "https://www.twitter.com/greenwichYC"
+    ],
+    "activity": [
+        {
+            "@id": "https://openactive.io/activity-list\#d2733a1c-662c-427a-a270-400171c07320",
+            "@type": "Concept",
+            "inScheme": "https://openactive.io/activity-list",
+            "prefLabel": "Rowing"
+        }
+    ],
+    "location": {
+        "@type": "Place",
+        "name": "Greenwich Yacht Club, London SE10 0BW, UK",
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 51.4955,
+            "longitude": 0.018473
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Greenwich Yacht Club, Peartree Wharf, 1 Peartree Way",
+            "addressLocality": "Greenwich",
+            "addressRegion": "London",
+            "postalCode": "SE10 0BW",
+            "addressCountry": "UK"
+        },
+    }
+</script>
+```
+
+**Example 3: Including some of the optional fields to maximise value**
+
+The kinds of information included here were identified as valuable by data users in the community.
+
+```json-ld
+<script type="application/ld+json">
+{
+    "@context": "https://openactive.io/",
+    "@type": "Organization",
+    "@id": "https://opensessions.io/api/id/organizers/2572",
+    "name": "Greenwich Yacht Club",
+    "description": "Community amateur sports club focused on getting people sailing.",
+    "url": "http://www.greenwichyachtclub.co.uk",
+    "sameAs": [
+        "http://www.greenwichyachtclub.co.uk",
+        "https://www.facebook.com/GreenwichYachtClub/",
+        "https://www.twitter.com/greenwichYC"
+    ],
+    "email": "training@greenwichyachtclub.co.uk",
+    "telephone": "02083960321",
+    "alternateName": [
+        "GYC"
+    ],
+    "memberOf": "Royal Yachting Association",
+    "activity": [
+        {
+            "@id": "https://openactive.io/activity-list\#d2733a1c-662c-427a-a270-400171c07320",
+            "@type": "Concept",
+            "inScheme": "https://openactive.io/activity-list",
+            "prefLabel": "Rowing"
+        }
+    ],
+    "location": {
+        "@type": "Place",
+        "name": "Greenwich Yacht Club, London SE10 0BW, UK",
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 51.4955,
+            "longitude": 0.018473
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Greenwich Yacht Club, Peartree Wharf, 1 Peartree Way",
+            "addressLocality": "Greenwich",
+            "addressRegion": "London",
+            "postalCode": "SE10 0BW",
+            "addressCountry": "UK"
+        },
+        "amenityFeature": [
+                {
+                    "name": "Changing Facilities",
+                    "@type": "ChangingFacilities",
+                    "value": true
+                },
+                {
+                    "name": "Showers",
+                    "@type": "Showers",
+                    "value": true
+                },
+                {
+                    "name": "Toilets",
+                    "@type": "Toilets",
+                    "value": true
+                },
+                {
+                    "name": "Parking",
+                    "@type": "Parking",
+                    "value": true
+                },
+                {
+                    "name": "Lockers",
+                    "@type": "Lockers",
+                    "value": false
+                },
+                {
+                    "name": "Towels",
+                    "@type": "Towels",
+                    "value": false
+                },
+                {
+                    "name": "Creche",
+                    "@type": "Creche",
+                    "value": false
+                },
+                {
+                    "name": "Baby Changing",
+                    "@type": "BabyChanging",
+                    "value": false
+                }
+            ]
+        },
+    }
+</script>
+```
+
+## Other examples
+
+For examples illustrating how to use this specification with club or league management systems, and via real-time paged data exchange (RPDE), look out for forthcoming updates to the OpenActive opportunity specification.
+</section>
+<section>
+## Conformance
+As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative.
+
+The key word REQUIRED in this document is to be interpreted as described in [BCP 14](https://www.rfc-editor.org/info/bcp14) when, and only when, it appears in all capitals, as shown here.
+</section>
+</body>
+</html>
