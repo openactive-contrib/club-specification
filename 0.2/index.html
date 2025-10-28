@@ -1,0 +1,747 @@
+<!DOCTYPE html><html lang="en" dir="ltr"><head><meta charset="utf-8"><meta name="generator" content="ReSpec 25.6.0"><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>OpenActive Club Specification</title>
+
+
+    <style>
+        /*Tidy tables*/
+        table {border-collapse: collapse; border: 1px solid #bec9d9;}
+        td, th {padding: 3px 0.5em; border:1px solid #bec9d9;}
+        tr th[colspan] {color: #005A9C; background-color: #FEEDE2; text-align: center}
+        th {color: #005A9C; background-color: #E2EDFE; font-weight: normal;border-bottom:1px solid #BEC9D9;}
+        tbody tr th {text-align: left;}
+        td.nb { font-size: smaller;}
+        /*Add OA spec image*/
+        html {
+        background-image: none !important;
+            }
+            body {
+        background: white top left fixed no-repeat !important;
+        background-size: 25px auto !important;
+        background-image: url('https://www.openactive.io/assets/openactive-label-specification.png') !important;
+            }
+            h1 {
+        font-family: 'Open Sans',sans-serif !important;
+        font-weight: 300 !important;
+        color: #3B3089 !important;
+        font-size: 220%;
+            }
+            #toc {
+        padding-top: 0px !important;
+            }
+                body {
+        background-size: 25px auto !important;
+            }
+            body.toc-sidebar #toc {
+        background-size: 25px auto !important;
+        background-attachment: fixed !important;
+            }
+            em.rfc2119 {
+                text-transform:     lowercase;
+                font-variant:       small-caps;
+                font-style:         normal;
+                color:              #900;
+            }
+    </style>
+<style id="respec-mainstyle">@keyframes pop{0%{transform:scale(1,1)}25%{transform:scale(1.25,1.25);opacity:.75}100%{transform:scale(1,1)}}.hljs{background:0 0!important}a abbr,h1 abbr,h2 abbr,h3 abbr,h4 abbr,h5 abbr,h6 abbr{border:none}dfn{font-weight:700}a.internalDFN{color:inherit;border-bottom:1px solid #99c;text-decoration:none}a.externalDFN{color:inherit;border-bottom:1px dotted #ccc;text-decoration:none}a.bibref{text-decoration:none}.respec-offending-element:target{animation:pop .25s ease-in-out 0s 1}.respec-offending-element,a[href].respec-offending-element{text-decoration:red wavy underline}@supports not (text-decoration:red wavy underline){.respec-offending-element:not(pre){display:inline-block}.respec-offending-element{background:url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=) bottom repeat-x}}#references :target{background:#eaf3ff;animation:pop .4s ease-in-out 0s 1}cite .bibref{font-style:normal}code{color:#c63501}th code{color:inherit}a[href].orcid{padding-left:4px;padding-right:4px}a[href].orcid>svg{margin-bottom:-2px}.toc a,.tof a{text-decoration:none}a .figno,a .secno{color:#000}ol.tof,ul.tof{list-style:none outside none}.caption{margin-top:.5em;font-style:italic}table.simple{border-spacing:0;border-collapse:collapse;border-bottom:3px solid #005a9c}.simple th{background:#005a9c;color:#fff;padding:3px 5px;text-align:left}.simple th a{color:#fff;padding:3px 5px;text-align:left}.simple th[scope=row]{background:inherit;color:inherit;border-top:1px solid #ddd}.simple td{padding:3px 10px;border-top:1px solid #ddd}.simple tr:nth-child(even){background:#f0f6ff}.section dd>p:first-child{margin-top:0}.section dd>p:last-child{margin-bottom:0}.section dd{margin-bottom:1em}.section dl.attrs dd,.section dl.eldef dd{margin-bottom:0}#issue-summary>ul,.respec-dfn-list{column-count:2}#issue-summary li,.respec-dfn-list li{list-style:none}details.respec-tests-details{margin-left:1em;display:inline-block;vertical-align:top}details.respec-tests-details>*{padding-right:2em}details.respec-tests-details[open]{z-index:999999;position:absolute;border:thin solid #cad3e2;border-radius:.3em;background-color:#fff;padding-bottom:.5em}details.respec-tests-details[open]>summary{border-bottom:thin solid #cad3e2;padding-left:1em;margin-bottom:1em;line-height:2em}details.respec-tests-details>ul{width:100%;margin-top:-.3em}details.respec-tests-details>li{padding-left:1em}a[href].self-link:hover{opacity:1;text-decoration:none;background-color:transparent}h2,h3,h4,h5,h6{position:relative}aside.example .marker>a.self-link{color:inherit}h2>a.self-link,h3>a.self-link,h4>a.self-link,h5>a.self-link,h6>a.self-link{border:none;color:inherit;font-size:83%;height:2em;left:-1.6em;opacity:.5;position:absolute;text-align:center;text-decoration:none;top:0;transition:opacity .2s;width:2em}h2>a.self-link::before,h3>a.self-link::before,h4>a.self-link::before,h5>a.self-link::before,h6>a.self-link::before{content:"§";display:block}@media (max-width:767px){dd{margin-left:0}h2>a.self-link,h3>a.self-link,h4>a.self-link,h5>a.self-link,h6>a.self-link{left:auto;top:auto}}@media print{.removeOnSave{display:none}}</style><meta name="description" content="This specification describes a simple data specification to support the standardised publication of
+organisation or club data. It aligns with the OpenActive data model for opportunities for people to engage
+in physical activities (&quot;opportunity data&quot;), which includes description of activities, as well as the events
+and locations in which they take place."><style>.hljs{display:block;overflow-x:auto;padding:.5em;color:#383a42;background:#fafafa}.hljs-comment,.hljs-quote{color:#717277;font-style:italic}.hljs-doctag,.hljs-formula,.hljs-keyword{color:#a626a4}.hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#ca4706;font-weight:700}.hljs-literal{color:#0b76c5}.hljs-addition,.hljs-attribute,.hljs-meta-string,.hljs-regexp,.hljs-string{color:#42803c}.hljs-built_in,.hljs-class .hljs-title{color:#9a6a01}.hljs-attr,.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#986801}.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol,.hljs-title{color:#336ae3}.hljs-emphasis{font-style:italic}.hljs-strong{font-weight:700}.hljs-link{text-decoration:underline}</style><style>var{position:relative;cursor:pointer}var[data-type]::after,var[data-type]::before{position:absolute;left:50%;top:-6px;opacity:0;transition:opacity .4s;pointer-events:none}var[data-type]::before{content:"";transform:translateX(-50%);border-width:4px 6px 0 6px;border-style:solid;border-color:transparent;border-top-color:#000}var[data-type]::after{content:attr(data-type);transform:translateX(-50%) translateY(-100%);background:#000;text-align:center;font-family:"Dank Mono","Fira Code",monospace;font-style:normal;padding:6px;border-radius:3px;color:#daca88;text-indent:0;font-weight:400}var[data-type]:hover::after,var[data-type]:hover::before{opacity:1}</style><script id="initialUserConfig" type="application/json">{
+  "specStatus": "CG-DRAFT",
+  "group": "openactive",
+  "noRecTrack": true,
+  "edDraftURI": "https://openactive-contrib.github.io/club-specification/EditorsDraft/draft.html",
+  "copyrightStart": 2025,
+  "latestVersion": null,
+  "github": "https://github.com/openactive-contrib/club-specification",
+  "otherLinks": [
+    {
+      "key": "Participate",
+      "data": [
+        {
+          "value": "GitHub openactive-contrib/club-specification",
+          "href": "https://github.com/openactive-contrib/club-specification/"
+        },
+        {
+          "value": "File a bug",
+          "href": "https://github.com/openactive-contrib/club-specification/issues/"
+        },
+        {
+          "value": "Commit history",
+          "href": "https://github.com/openactive-contrib/club-specification/commits/gh-pages"
+        },
+        {
+          "value": "Pull requests",
+          "href": "https://github.com/openactive-contrib/club-specification/pulls/"
+        }
+      ]
+    },
+    {
+      "key": "Version",
+      "value": "0.2",
+      "href": "https://openactive-contrib.github.io/club-specification/EditorsDraft/draft.html"
+    }
+  ],
+  "editors": [
+    {
+      "name": "Howard Askew",
+      "url": "https://theodi.org/person/howard-askew",
+      "company": "Open Data Institute",
+      "companyURL": "http://opendata.institute/",
+      "w3cid": 138948
+    }
+  ],
+  "xref": "web-platform",
+  "format": "markdown",
+  "wg": "OpenActive Community Group",
+  "wgURI": "https://www.w3.org/community/openactive/",
+  "logos": [
+    {
+      "src": "https://www.openactive.io/assets/openactive-logo-small.png",
+      "url": "https://www.openactive.io",
+      "alt": "openactive.io",
+      "width": 262,
+      "height": 44,
+      "id": "oa-logo"
+    }
+  ],
+  "localBiblio": {
+    "JSON-LD": {
+      "href": "https://www.w3.org/TR/json-ld/",
+      "title": "JSON-LD 1.0",
+      "status": "REC",
+      "publisher": "W3C"
+    },
+    "SCHEMA-ORG": {
+      "href": "https://schema.org/",
+      "title": "Schema.org"
+    },
+    "SKOS": {
+      "href": "https://www.w3.org/TR/skos-primer",
+      "title": "SKOS Simple Knowledge Organization System Primer",
+      "status": "NOTE",
+      "publisher": "W3C"
+    },
+    "BasicGeo": {
+      "href": "https://www.w3.org/2003/01/geo/",
+      "title": "W3C Semantic Web Interest Group: Basic Geo",
+      "publisher": "SWIG"
+    },
+    "Publishing-Opportunity-Data": {
+      "href": "https://www.openactive.io/opportunity-data-primer/",
+      "title": "Publishing Opportunity Data: A Primer",
+      "publisher": "OpenActive Community Group"
+    },
+    "OpenActive-Beta-Namespace": {
+      "href": "https://www.openactive.io/ns-beta/",
+      "title": "OpenActive Beta Namespace",
+      "publisher": "OpenActive Community Group"
+    },
+    "OpenActive-Vocabulary": {
+      "href": "https://www.openactive.io/ns/",
+      "title": "OpenActive Vocabulary",
+      "publisher": "OpenActive Community Group"
+    },
+    "OpenActive-Activity-List": {
+      "href": "https://openactive.io/activity-list",
+      "title": "OpenActive Activity List",
+      "publisher": "OpenActive Community Group"
+    }
+  },
+  "publishISODate": "2025-10-28T00:00:00.000Z",
+  "generatedSubtitle": "Draft Community Group Report 28 October 2025"
+}</script><link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/cg-draft"></head>
+<body class="h-entry" data-cite="HTML INFRA URL WEBIDL DOM FETCH"><div class="head">
+    <a class="logo" href="https://www.openactive.io"><img id="oa-logo" alt="openactive.io" width="262" height="44" src="https://www.openactive.io/assets/openactive-logo-small.png"></a> <h1 id="title" class="title">OpenActive Club Specification</h1>
+
+    <h2>
+      Draft Community Group Report
+      <time class="dt-published" datetime="2025-10-28">28 October 2025</time>
+    </h2>
+    <dl>
+      <dt>Version:</dt><dd>
+        <a href="https://openactive-contrib.github.io/club-specification/0.2/index.html">0.2</a>
+      </dd>
+
+      <dt>Latest editor's draft:</dt><dd><a href="https://openactive-contrib.github.io/club-specification/EditorsDraft/draft.html">https://openactive-contrib.github.io/club-specification/EditorsDraft/draft.html</a></dd>
+
+
+
+
+      <dt>Editor:</dt>
+      <dd class="p-author h-card vcard" data-editor-id="138948"><a class="u-url url p-name fn" href="https://theodi.org/person/howard-askew">Howard Askew</a>
+            (<a class="p-org org h-org h-card" href="http://opendata.institute/">Open Data Institute</a>)
+          </dd>
+
+
+      <dt>Participate:</dt><dd>
+    <a href="https://github.com/openactive-contrib/club-specification/">GitHub openactive-contrib/club-specification</a>
+  </dd><dd>
+    <a href="https://github.com/openactive-contrib/club-specification/issues/">File a bug</a>
+  </dd><dd>
+    <a href="https://github.com/openactive-contrib/club-specification/commits/gh-pages">Commit history</a>
+  </dd><dd>
+    <a href="https://github.com/openactive-contrib/club-specification/pulls/">Pull requests</a>
+  </dd>
+    </dl>
+
+    <p class="copyright">
+          <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a>
+          ©
+          2025
+
+          the Contributors to the OpenActive Club Specification, published by the
+          <a href="https://www.w3.org/community/openactive/">OpenActive Community Group</a> under the
+          <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>. A human-readable
+                <a href="https://www.w3.org/community/about/agreements/cla-deed/">summary</a>
+                is available.
+
+        </p>
+    <hr title="Separator for header">
+  </div><section id="abstract" class="introductory"><h2>Abstract</h2><p>This specification describes a simple data specification to support the standardised publication of
+organisation or club data. It aligns with the OpenActive data model for opportunities for people to engage
+in physical activities ("opportunity data"), which includes description of activities, as well as the events
+and locations in which they take place.</p><p>OpenActive specifications are intended to support the publication of opportunity data as open data for
+anyone to access, use and share. This specification is ideal for those new to publishing open data or those that are not in a position to publish individual dated and timed events or facility slots.
+The model may be useful in guiding the development of new and existing systems and applications that consume
+opportunity and organisation or club data.</p><p>The specification is an output of the <a href="http://www.w3.org/community/openactive/">OpenActive Community Group</a></p><p>The data model described in this document has been mapped to existing standards and vocabularies, including
+SKOS and the Schema.org types and properties.</p></section><section id="sotd" class="introductory"><h2>Status of This Document</h2><p>
+      This specification was published by the
+      <a href="https://www.w3.org/community/openactive/">OpenActive Community Group</a>. It is not a W3C Standard nor is it
+      on the W3C Standards Track.
+
+            Please note that under the
+            <a href="https://www.w3.org/community/about/agreements/cla/">W3C Community Contributor License Agreement (CLA)</a>
+            there is a limited opt-out and other conditions apply.
+
+      Learn more about
+      <a href="https://www.w3.org/community/">W3C Community and Business Groups</a>.
+    </p><p>Contributions to this document are welcomed. Please add any solutions, comments, or improvements you might have via <a href="https://github.com/openactive-contrib/club-specification/issues">GitHub</a>.</p>
+</section><nav id="toc"><h2 class="introductory" id="table-of-contents">Table of Contents</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#introduction"><bdi class="secno">1. </bdi>Introduction</a></li><li class="tocline"><a class="tocxref" href="#formats"><bdi class="secno">2. </bdi>Formats</a></li><li class="tocline"><a class="tocxref" href="#data-model"><bdi class="secno">3. </bdi>Data Model</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#describing-organisations"><bdi class="secno">3.1 </bdi>Describing Organisations</a></li><li class="tocline"><a class="tocxref" href="#describing-activities"><bdi class="secno">3.2 </bdi>Describing Activities</a></li><li class="tocline"><a class="tocxref" href="#describing-place"><bdi class="secno">3.3 </bdi>Describing Place</a></li></ol></li><li class="tocline"><a class="tocxref" href="#worked-examples"><bdi class="secno">4. </bdi>Worked Examples</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#how-to-use-this-spec-to-add-standardised-machine-readable-data-to-a-club-website"><bdi class="secno">4.1 </bdi>How to use this spec to add standardised machine readable data to a club website.</a></li><li class="tocline"><a class="tocxref" href="#other-examples"><bdi class="secno">4.2 </bdi>Other examples</a></li></ol></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">5. </bdi>Conformance</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>References</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normative-references"><bdi class="secno">A.1 </bdi>
+        Normative references
+      </a></li></ol></li></ol></nav><section id="introduction"><h2 id="x1-introduction"><bdi class="secno">1. </bdi>Introduction<a class="self-link" aria-label="§" href="#introduction"></a></h2><p>Lack of access to up to date information about opportunities for sport and physical activity is a barrier to getting people active. The OpenActive initiative, as a community of representatives from across the sector, has developed a range of data specifications to address this, using data to help people get active.</p><p>In our ideal user experience, a person can readily search online for opportunities nearby, find enough detail to understand if the activity is appropriate for their particular circumstances, then directly reserve a place in a class or book a court or facility.</p><p>Feedback from the sector shows:</p><ul>
+<li>Many potential activity providers are not yet able to share open data about their sessions and facilities in such detail.</li>
+<li>There is demand for information about activity providers (often sports clubs) in a local area.</li>
+<li>There is no agreed standard, structure or format for sharing such information.</li>
+</ul><p>This specification aims to support the sharing of open data about clubs and organisations providing opportunities for activity. By improving consistency in the provision of such data, consumers can have more confidence in data supply and data quality and develop innovative methods to engage potential end-users.</p><p>The original <a href="https://openactive.io/modelling-opportunity-data/">OpenActive Opportunity data model</a> was centered around Events. This specification is based on the following pattern or profile of elements from that model:</p><p><img src="images/Club%20data%20model%20v0.1.png" alt="Club data model"></p><p><strong>Organization</strong>
+An Organization is a basic entity to represent an organization such as a school, NGO, corporation, club, etc. Relevant organization subclasses here include (but are not limited to):</p><ul>
+<li>SportsClub (<a href="https://schema.org/SportsClub">https://schema.org/SportsClub</a>)</li>
+<li>SportsOrganization (<a href="https://schema.org/SportsOrganization">https://schema.org/SportsOrganization</a>)</li>
+</ul><p><strong>Activity</strong>
+OpenActive’s primary focus is physical activity - any exercise, sport or other form of bodily movement that involves physical effort. The recommended approach is to use the <a href="https://activity-list.openactive.io/en/hierarchical_concepts.html">OpenActive Activity List</a>, based on the <a href="https://www.w3.org/TR/skos-primer">SKOS</a> standard for publishing controlled vocabularies.</p><p>The Activity List describes a set of Physical Activities. An Activity List may be a simple list of activity names, but it can also capture additional information. Examples include alternative names for an activity e.g. "Soccer" is a synonym for "Football". Further, to group activities, we can define "broader" and "narrower" relationships. For example Judo, Karate and Kendo are all more specific examples of the broader activity of "Martial Arts".</p><p><strong>Place</strong>
+This specification uses Place as a general concept to refer to all types of locations, venues and facilities. Recognising that clubs will vary in the number and type of premises they may operate from, the specification allows that this Place can be defined flexibly. Examples here include:</p><ul>
+<li>A head office, administrative base or clubhouse</li>
+<li>One or more facilities where the activities take place</li>
+</ul></section><section id="formats"><h2 id="x2-formats"><bdi class="secno">2. </bdi>Formats<a class="self-link" aria-label="§" href="#formats"></a></h2><p>Reflecting the wide variety of tools and platforms in use, and also that the sector is at an early stage in sharing its data more widely, this specification does not prescribe specific data formats or APIs. Club data could be published as JSON, CSV, XML or other formats.</p><p>That said, in the examples that follow, we use the JSON-LD format and recommend this approach. JSON-LD offers several advantages, including its widespread use in modem web tools, its readability for both humans and machines, and its compatibility with linked data principles. For more details, see <a href="https://w3c.github.io/json-ld-bp/">JSON-LD Best Practices</a>.</p><p>The JSON-LD approach is ideally suited for clubs with a website or web page.</p><p>OpenActive event data, for sessions and facility slots, are published via the Realtime Paged Data Exchange approach (RPDE).  Alongside this standalone specification, we are proposing an aligned update to the Opportunity Data specification, expanding the representation of organisation/club in the data model, and providing (optional) guidance for publishing club data via RPDE feeds.</p><p>This would support ongoing publication of up-to-date information about affiliated clubs from National Governing Bodies, paving the way for the addition of sessions and slots as a club’s data skills and systems evolve.</p></section><section id="data-model"><h2 id="x3-data-model"><bdi class="secno">3. </bdi>Data Model<a class="self-link" aria-label="§" href="#data-model"></a></h2><section id="describing-organisations"><h3 id="x3-1-describing-organisations"><bdi class="secno">3.1 </bdi>Describing Organisations<a class="self-link" aria-label="§" href="#describing-organisations"></a></h3><p>Schema.org’s Organization, SportsClub and SportsOrganization types support a common set of properties to describe the information required:</p><table>
+<thead>
+<tr>
+<th align="left">Key</th>
+<th align="left">Property</th>
+<th align="left">Status</th>
+<th align="left">Format</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">name</td>
+<td align="left"><a href="https://schema.org/name">schema:name</a></td>
+<td align="left"><em class="rfc2119" title="REQUIRED">REQUIRED</em></td>
+<td align="left">String</td>
+<td align="left">The name of the organisation.</td>
+</tr>
+<tr>
+<td align="left">description</td>
+<td align="left"><a href="https://schema.org/description">schema:description</a></td>
+<td align="left">Recommended</td>
+<td align="left">String</td>
+<td align="left">A free text description containing a brief summary of the organisation.</td>
+</tr>
+<tr>
+<td align="left">url</td>
+<td align="left"><a href="https://schema.org/url">schema:url</a></td>
+<td align="left">Recommended</td>
+<td align="left">String</td>
+<td align="left">A URL to the organisation’s website homepage or other page about the organisation.<sup>1</sup></td>
+</tr>
+<tr>
+<td align="left">sameAs</td>
+<td align="left"><a href="https://schema.org/sameAs">schema:sameAs</a></td>
+<td align="left">Recommended</td>
+<td align="left">String or array of String</td>
+<td align="left">Lists the URL(s) of the official social media profile pages associated with the organisation.<sup>1</sup></td>
+</tr>
+<tr>
+<td align="left">activity</td>
+<td align="left"><a href="https://openactive.io/activity">oa:activity</a></td>
+<td align="left"><em class="rfc2119" title="REQUIRED">REQUIRED</em></td>
+<td align="left">Array of <a href="https://www.w3.org/2009/08/skos-reference/skos.html#Concept">skos:Concept</a></td>
+<td align="left">Specifies one or more physical activities that are provided by the organisation.</td>
+</tr>
+<tr>
+<td align="left">location</td>
+<td align="left"><a href="https://schema.org/location">schema:location</a></td>
+<td align="left"><em class="rfc2119" title="REQUIRED">REQUIRED</em></td>
+<td align="left"><a href="https://schema.org/Place">schema:Place</a> or array of <a href="https://schema.org/Place">schema:Place</a>, <a href="https://schema.org/address">schema: address</a>, String</td>
+<td align="left">The main address of the organisation or key locations of the activities provided by the organisation.</td>
+</tr>
+<tr>
+<td align="left">email</td>
+<td align="left"><a href="https://schema.org/email">schema:email</a></td>
+<td align="left">Optional</td>
+<td align="left">String</td>
+<td align="left">A contact email address for the organisation.<sup>1</sup></td>
+</tr>
+<tr>
+<td align="left">telephone</td>
+<td align="left"><a href="https://schema.org/telephone">schema:telephone</a></td>
+<td align="left">Optional</td>
+<td align="left">String</td>
+<td align="left">A contact telephone number for the organisation.<sup>1</sup></td>
+</tr>
+<tr>
+<td align="left">logo</td>
+<td align="left"><a href="https://schema.org/logo">schema:logo</a></td>
+<td align="left">Optional</td>
+<td align="left"><a href="https://schema.org/ImageObject">schema:ImageObject</a></td>
+<td align="left">A URL to an image associated with the organisation which can be presented alongside its name.</td>
+</tr>
+<tr>
+<td align="left">alternateName</td>
+<td align="left"><a href="https://schema.org/alternateName">schema:alternativeName</a></td>
+<td align="left">Optional</td>
+<td align="left">String or array of String</td>
+<td align="left">Aliases, common acronyms or alternative names for the organisation.</td>
+</tr>
+<tr>
+<td align="left">genderRestriction</td>
+<td align="left"><a href="https://openactive.io/genderRestriction">oa:genderRestriction</a></td>
+<td align="left">Optional</td>
+<td align="left"><a href="https://openactive.io/GenderRestrictionType">oa:GenderRestrictionType</a></td>
+<td align="left">Indicates that an organisation provides activities that are restricted to Male or Female participants, or that there are no restrictions. 3  values are defined as URIs however see <a href="https://github.com/openactive/modelling-opportunity-data/issues/69%20">related discussion</a>.</td>
+</tr>
+<tr>
+<td align="left">ageRange</td>
+<td align="left"><a href="https://openactive.io/ageRange">oa:ageRange</a></td>
+<td align="left">Optional</td>
+<td align="left"><a href="https://schema.org/QuantitativeValue">schema:QuantitativeValue</a></td>
+<td align="left">Indicates that an organisation provides activities suitable for a specific age range. Specified as a <a href="https://schema.org/QuantitativeValue">QuantitativeValue</a> with <a href="https://schema.org/minValue">minValue</a> and <a href="https://schema.org/maxValue">maxValue</a> properties</td>
+</tr>
+<tr>
+<td align="left">memberOf</td>
+<td align="left"><a href="https://schema.org/memberOf">schema:memberOf</a></td>
+<td align="left">Optional</td>
+<td align="left">String</td>
+<td align="left">The Organisation Id for an organisation that this club is affiliated to. For example, a club can link to its National Governing Body.</td>
+</tr>
+<tr>
+<td align="left">member</td>
+<td align="left"><a href="https://schema.org/member">schema:member</a></td>
+<td align="left">Optional</td>
+<td align="left">String or array of String</td>
+<td align="left">The organisation IDs for organisations affiliated to this organisation. For example, a National Governing Body can list its current affiliated clubs.</td>
+</tr>
+</tbody></table><p><sup>1</sup> At least one form of contact information (<code>url</code>, <code>sameAs</code>, <code>email</code>, or <code>telephone</code>) <strong><em class="rfc2119" title="MUST">MUST</em></strong> be provided for each organisation.</p></section><section id="describing-activities"><h3 id="x3-2-describing-activities"><bdi class="secno">3.2 </bdi>Describing Activities<a class="self-link" aria-label="§" href="#describing-activities"></a></h3><p>The <a href="https://activity-list.openactive.io/en/hierarchical_concepts.html">OpenActive Activity List</a> provides an openly licensed standard activity list that can be used by organisations. It is a controlled vocabulary published using the types and properties defined by the <a href="https://www.w3.org/TR/skos-primer/">SKOS</a> standard. That standard allows:</p><ul>
+<li>activities to be organised into hierarchies to capture broader-narrow relationships, e.g. "Martial Arts" and "Judo"</li>
+<li>sharing of alternative labels to support search and indexing</li>
+<li>the sharing of standard codes to support data integration</li>
+</ul><p>If you would like to propose additions or improvements to the list please use this <a href="https://docs.google.com/forms/d/e/1FAIpQLSfaKgMC-dySy8G7Lvv_9Uh-o48Db37B3BwHSHANyPlEpiEmFA/viewform">form</a>.</p><p>The following properties from the <a href="https://openactive.io/modelling-opportunity-data/#bib-SKOS">SKOS</a> specification can be used to describe physical activities.</p><table>
+<thead>
+<tr>
+<th align="left">Key</th>
+<th align="left">Property</th>
+<th align="left">Status</th>
+<th align="left">Format</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">prefLabel</td>
+<td align="left"><a href="https://www.w3.org/2009/08/skos-reference/skos.html#prefLabel">skos:prefLabel</a></td>
+<td align="left"><em class="rfc2119" title="REQUIRED">REQUIRED</em></td>
+<td align="left">String</td>
+<td align="left">Preferred label for the physical activity.</td>
+</tr>
+<tr>
+<td align="left">inScheme</td>
+<td align="left"><a href="https://www.w3.org/2009/08/skos-reference/skos.html#inScheme">skos:inScheme</a></td>
+<td align="left">Recommended</td>
+<td align="left">URI</td>
+<td align="left">Link to the Activity List in which this physical activity is defined e.g. “<a href="https://openactive.io/activity-list">https://openactive.io/activity-list</a>”</td>
+</tr>
+<tr>
+<td align="left">altLabel</td>
+<td align="left"><a href="https://www.w3.org/2009/08/skos-reference/skos.html#altLabel">skos:altLabel</a></td>
+<td align="left">Optional</td>
+<td align="left">Array of String</td>
+<td align="left">Alternative labels for the physical activity</td>
+</tr>
+<tr>
+<td align="left">broader</td>
+<td align="left"><a href="https://www.w3.org/2009/08/skos-reference/skos.html#broader">skos:broader</a></td>
+<td align="left">Optional</td>
+<td align="left">Array of URI</td>
+<td align="left">Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a parent or broader term. E.g. "Martial Arts" is broader than "Tai Chi".</td>
+</tr>
+<tr>
+<td align="left">narrower</td>
+<td align="left"><a href="https://www.w3.org/2009/08/skos-reference/skos.html#narrower">skos:narrower</a></td>
+<td align="left">Optional</td>
+<td align="left">Array of URI</td>
+<td align="left">Where an Activity List is organised as a hierarchy of activities, this property can be used to refer to a child or narrower term. E.g. "Tai Chi" is a narrower term of "Martial Arts"</td>
+</tr>
+<tr>
+<td align="left">notation</td>
+<td align="left"><a href="https://www.w3.org/2009/08/skos-reference/skos.html#notation">skos:notation</a></td>
+<td align="left">Optional</td>
+<td align="left">String</td>
+<td align="left">Provides a unique code or identifier for an activity</td>
+</tr>
+</tbody></table></section><section id="describing-place"><h3 id="x3-3-describing-place"><bdi class="secno">3.3 </bdi>Describing Place<a class="self-link" aria-label="§" href="#describing-place"></a></h3><p>The following table lists a number of properties that can be used to describe a place. This includes a number of optional properties from the full OpenActive opportunity data model.</p><table>
+<thead>
+<tr>
+<th align="left">Key</th>
+<th align="left">Property</th>
+<th align="left">Status</th>
+<th align="left">Format</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">name</td>
+<td align="left"><a href="https://schema.org/name">schema:name</a></td>
+<td align="left"><em class="rfc2119" title="REQUIRED">REQUIRED</em></td>
+<td align="left">String</td>
+<td align="left">The name of the Place</td>
+</tr>
+<tr>
+<td align="left">address</td>
+<td align="left"><a href="https://schema.org/address">schema:address</a></td>
+<td align="left">Recommended</td>
+<td align="left"><a href="https://schema.org/PostalAddress">schema:PostalAddress</a> or String</td>
+<td align="left">The street address of the location, expressed as a <a href="https://schema.org/PostalAddress">schema:PostalAddress</a>. Where possible publishers should specify an address as an object.</td>
+</tr>
+<tr>
+<td align="left">geo</td>
+<td align="left"><a href="https://schema.org/geo">schema:geo</a></td>
+<td align="left">Recommended</td>
+<td align="left"><a href="https://schema.org/GeoCoordinates">schema:GeoCoordinates</a></td>
+<td align="left">The geographic co-ordinates, specified as a latitude and longitude of a Place</td>
+</tr>
+<tr>
+<td align="left">description</td>
+<td align="left"><a href="https://schema.org/description">schema:description</a></td>
+<td align="left">Optional</td>
+<td align="left">String</td>
+<td align="left">A free text description of the Place</td>
+</tr>
+<tr>
+<td align="left">image</td>
+<td align="left"><a href="https://schema.org/image">schema:image</a></td>
+<td align="left">Optional</td>
+<td align="left">Array of <a href="https://schema.org/ImageObject">schema:ImageObject</a></td>
+<td align="left">One or more images or photos that depicts the Place</td>
+</tr>
+<tr>
+<td align="left">URI</td>
+<td align="left"><a href="https://schema.org/url">schema:url</a></td>
+<td align="left">Optional</td>
+<td align="left">URI</td>
+<td align="left">A URL to a web page (or section of a page) that describes the Place</td>
+</tr>
+<tr>
+<td align="left">identifier</td>
+<td align="left"><a href="https://schema.org/identifier">schema:identifier</a></td>
+<td align="left">Optional</td>
+<td align="left">Number, String, <a href="https://schema.org/PropertyValue">schema:PropertyValue</a></td>
+<td align="left">A local identifier for the resource.</td>
+</tr>
+<tr>
+<td align="left">containInPlace</td>
+<td align="left"><a href="https://schema.org/containedInPlace">schema:containedInPlace</a></td>
+<td align="left">Optional</td>
+<td align="left"><a href="https://schema.org/Place">schema:Place</a></td>
+<td align="left">Indicates that this Place is part of a larger location. Can be used to allow, e.g. a pitch or other facility to be related to a parent location such as a Leisure Centre</td>
+</tr>
+<tr>
+<td align="left">containsPlace</td>
+<td align="left"><a href="https://schema.org/containsPlace">schema:containsPlace</a></td>
+<td align="left">Optional</td>
+<td align="left">Array of <a href="https://schema.org/Place">schema:Place</a></td>
+<td align="left">Relates a Place to one or more other locations and facilities that it contains.</td>
+</tr>
+<tr>
+<td align="left">telephone</td>
+<td align="left"><a href="https://schema.org/telephone">schema:telephone</a></td>
+<td align="left">Optional</td>
+<td align="left">String</td>
+<td align="left">A contact telephone number for the location, e.g. for enquiries</td>
+</tr>
+<tr>
+<td align="left">openingHoursSpecification</td>
+<td align="left"><a href="https://schema.org/openingHoursSpecification">schema:openingHoursSpecification</a></td>
+<td align="left">Optional</td>
+<td align="left">Array of <a href="https://schema.org/OpeningHoursSpecification">schema:OpeningHoursSpecification</a></td>
+<td align="left">Specifies the opening hours of a location.</td>
+</tr>
+<tr>
+<td align="left">amenityFeature</td>
+<td align="left"><a href="https://schema.org/amenityFeature">schema:amenityFeature</a></td>
+<td align="left">Optional</td>
+<td align="left">Array of <a href="https://schema.org/LocationFeatureSpecification">schema:LocationFeatureSpecification</a></td>
+<td align="left">Used to indicate whether specific amenities are available at a location, through an array of <a href="https://schema.org/LocationFeatureSpecification">schema:LocationFeatureSpecification</a> objects.</td>
+</tr>
+</tbody></table><p>Schema.org provides the following properties for publishing address data using the <a href="https://schema.org/PostalAddress">schema:PostalAddress</a> type.</p><table>
+<thead>
+<tr>
+<th align="left">Key</th>
+<th align="left">Property</th>
+<th align="left">Status</th>
+<th align="left">Format</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">streetAddress</td>
+<td align="left"><a href="https://schema.org/streetAddress">schema:streetAddress</a></td>
+<td align="left"><em class="rfc2119" title="REQUIRED">REQUIRED</em></td>
+<td align="left">String</td>
+<td align="left">Street address</td>
+</tr>
+<tr>
+<td align="left">addressLocality</td>
+<td align="left"><a href="https://schema.org/addressLocality">schema:addressLocality</a></td>
+<td align="left"><em class="rfc2119" title="REQUIRED">REQUIRED</em></td>
+<td align="left">String</td>
+<td align="left">Town or other area</td>
+</tr>
+<tr>
+<td align="left">addressRegion</td>
+<td align="left"><a href="https://schema.org/addressRegion">schema:addressRegion</a></td>
+<td align="left"><em class="rfc2119" title="REQUIRED">REQUIRED</em></td>
+<td align="left">String</td>
+<td align="left">Region</td>
+</tr>
+<tr>
+<td align="left">postalCode</td>
+<td align="left"><a href="https://schema.org/postalCode">schema:postalCode</a></td>
+<td align="left"><em class="rfc2119" title="REQUIRED">REQUIRED</em></td>
+<td align="left">String</td>
+<td align="left">Postcode</td>
+</tr>
+<tr>
+<td align="left">addressCountry</td>
+<td align="left"><a href="https://schema.org/addressCountry">schema:addressCountry</a></td>
+<td align="left"><em class="rfc2119" title="REQUIRED">REQUIRED</em></td>
+<td align="left">String</td>
+<td align="left">ISO 3166-1 alpha-2 country code</td>
+</tr>
+</tbody></table><p>A more precise geographical location can be provided for a <a href="https://schema.org/Place">schema:Place</a> by adding a <a href="https://schema.org/geo">schema:geo</a> property. The value of this property is a <a href="https://schema.org/GeoCoordinates">schema:GeoCoordinates</a> object, with the following properties.</p><table>
+<thead>
+<tr>
+<th align="left">Key</th>
+<th align="left">Property</th>
+<th align="left">Status</th>
+<th align="left">Format</th>
+<th align="left">Notes</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">latitude</td>
+<td align="left"><a href="https://schema.org/latitude">schema:latitude</a></td>
+<td align="left"><em class="rfc2119" title="REQUIRED">REQUIRED</em></td>
+<td align="left">Number</td>
+<td align="left">Latitude</td>
+</tr>
+<tr>
+<td align="left">longitude</td>
+<td align="left"><a href="https://schema.org/longitude">schema:longitude</a></td>
+<td align="left"><em class="rfc2119" title="REQUIRED">REQUIRED</em></td>
+<td align="left">Number</td>
+<td align="left">Longitude</td>
+</tr>
+</tbody></table><p>Latitude and longitude values should be provided to a precision of at least two decimal places in order to be useful to consumers.</p></section></section><section id="worked-examples"><h2 id="x4-worked-examples"><bdi class="secno">4. </bdi>Worked Examples<a class="self-link" aria-label="§" href="#worked-examples"></a></h2><section id="how-to-use-this-spec-to-add-standardised-machine-readable-data-to-a-club-website"><h3 id="x4-1-how-to-use-this-spec-to-add-standardised-machine-readable-data-to-a-club-website"><bdi class="secno">4.1 </bdi>How to use this spec to add standardised machine readable data to a club website.<a class="self-link" aria-label="§" href="#how-to-use-this-spec-to-add-standardised-machine-readable-data-to-a-club-website"></a></h3><p>To illustrate the basic concepts and the JSON-LD representation, consider the following examples, adapted from an existing OpenActive opportunity based at a club.</p><p><strong>Example 1: Starting with the simplest example, using required fields only, in their simplest form.</strong>
+(This is for illustrative purposes only and not recommended at all.)</p><p>“@context”, “@type” and “@id” are JSON-LD keywords.</p><p>The following script could be added at the end of the 'head' tag on the club’s website.</p><pre><code class="json-ld hljs" aria-busy="false">&lt;script type="application/ld+json"&gt;
+{
+    "@context": "https://openactive.io/",
+    "@type": "Organization",
+    "@id": "https://opensessions.io/api/id/organizers/2572",
+    "name": "Greenwich Yacht Club",
+    "activity": [
+        {
+            "@type": "Concept",
+            "prefLabel": "Rowing"
+        }
+    ],
+    "location": "Greenwich Yacht Club, London SE10 0BW, UK"
+}
+&lt;/script&gt;</code></pre><p>However, using the fuller specification allows us to provide much richer information. As this is done consistently between data publishers, data consumers can collate the information more easily.</p><p><strong>Example 2: Using the <em class="rfc2119" title="REQUIRED">REQUIRED</em> and Recommended fields, in their recommended forms</strong></p><pre><code class="json-ld hljs" aria-busy="false">&lt;script type="application/ld+json"&gt;
+{
+    "@context": "https://openactive.io/",
+    "@type": "Organization",
+    "@id": "https://opensessions.io/api/id/organizers/2572",
+    "name": "Greenwich Yacht Club",
+    "description": "Community amateur sports club focused on getting people sailing.",
+    "url": "http://www.greenwichyachtclub.co.uk",
+    "sameAs": [
+        "http://www.greenwichyachtclub.co.uk",
+        "https://www.facebook.com/GreenwichYachtClub/",
+        "https://www.twitter.com/greenwichYC"
+    ],
+    "activity": [
+        {
+            "@id": "https://openactive.io/activity-list\#d2733a1c-662c-427a-a270-400171c07320",
+            "@type": "Concept",
+            "inScheme": "https://openactive.io/activity-list",
+            "prefLabel": "Rowing"
+        }
+    ],
+    "location": {
+        "@type": "Place",
+        "name": "Greenwich Yacht Club, London SE10 0BW, UK",
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 51.4955,
+            "longitude": 0.018473
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Greenwich Yacht Club, Peartree Wharf, 1 Peartree Way",
+            "addressLocality": "Greenwich",
+            "addressRegion": "London",
+            "postalCode": "SE10 0BW",
+            "addressCountry": "UK"
+        },
+    }
+&lt;/script&gt;</code></pre><p><strong>Example 3: Including some of the optional fields to maximise value</strong></p><p>The kinds of information included here were identified as valuable by data users in the community.</p><pre><code class="json-ld hljs" aria-busy="false">&lt;script type="application/ld+json"&gt;
+{
+    "@context": "https://openactive.io/",
+    "@type": "Organization",
+    "@id": "https://opensessions.io/api/id/organizers/2572",
+    "name": "Greenwich Yacht Club",
+    "description": "Community amateur sports club focused on getting people sailing.",
+    "url": "http://www.greenwichyachtclub.co.uk",
+    "sameAs": [
+        "http://www.greenwichyachtclub.co.uk",
+        "https://www.facebook.com/GreenwichYachtClub/",
+        "https://www.twitter.com/greenwichYC"
+    ],
+    "email": "training@greenwichyachtclub.co.uk",
+    "telephone": "02083960321",
+    "alternateName": [
+        "GYC"
+    ],
+    "memberOf": "Royal Yachting Association",
+    "activity": [
+        {
+            "@id": "https://openactive.io/activity-list\#d2733a1c-662c-427a-a270-400171c07320",
+            "@type": "Concept",
+            "inScheme": "https://openactive.io/activity-list",
+            "prefLabel": "Rowing"
+        }
+    ],
+    "location": {
+        "@type": "Place",
+        "name": "Greenwich Yacht Club, London SE10 0BW, UK",
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 51.4955,
+            "longitude": 0.018473
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Greenwich Yacht Club, Peartree Wharf, 1 Peartree Way",
+            "addressLocality": "Greenwich",
+            "addressRegion": "London",
+            "postalCode": "SE10 0BW",
+            "addressCountry": "UK"
+        },
+        "amenityFeature": [
+                {
+                    "name": "Changing Facilities",
+                    "@type": "ChangingFacilities",
+                    "value": true
+                },
+                {
+                    "name": "Showers",
+                    "@type": "Showers",
+                    "value": true
+                },
+                {
+                    "name": "Toilets",
+                    "@type": "Toilets",
+                    "value": true
+                },
+                {
+                    "name": "Parking",
+                    "@type": "Parking",
+                    "value": true
+                },
+                {
+                    "name": "Lockers",
+                    "@type": "Lockers",
+                    "value": false
+                },
+                {
+                    "name": "Towels",
+                    "@type": "Towels",
+                    "value": false
+                },
+                {
+                    "name": "Creche",
+                    "@type": "Creche",
+                    "value": false
+                },
+                {
+                    "name": "Baby Changing",
+                    "@type": "BabyChanging",
+                    "value": false
+                }
+            ]
+        },
+    }
+&lt;/script&gt;</code></pre></section><section id="other-examples"><h3 id="x4-2-other-examples"><bdi class="secno">4.2 </bdi>Other examples<a class="self-link" aria-label="§" href="#other-examples"></a></h3><p>For examples illustrating how to use this specification with club or league management systems, and via real-time paged data exchange (RPDE), look out for forthcoming updates to the OpenActive opportunity specification.</p></section></section><section id="conformance"><h2 id="x5-conformance"><bdi class="secno">5. </bdi>Conformance<a class="self-link" aria-label="§" href="#conformance"></a></h2><p>
+      As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative. Everything else in this specification is normative.
+    </p><p>
+        The key words <em class="rfc2119">MUST</em> and <em class="rfc2119">REQUIRED</em> in this document
+        are to be interpreted as described in
+        <a href="https://tools.ietf.org/html/bcp14">BCP 14</a>
+        [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc2119" title="Key words for use in RFCs to Indicate Requirement Levels">RFC2119</a></cite>] [<cite><a class="bibref" data-link-type="biblio" href="#bib-rfc8174" title="Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words">RFC8174</a></cite>]
+        when, and only when, they appear in all capitals, as shown here.
+      </p></section><script type="text/javascript">
+    // <![CDATA[  <-- For SVG support
+    if ('WebSocket' in window) {
+        (function() {
+            function refreshCSS() {
+                var sheets = [].slice.call(document.getElementsByTagName("link"));
+                var head = document.getElementsByTagName("head")[0];
+                for (var i = 0; i < sheets.length; ++i) {
+                    var elem = sheets[i];
+                    head.removeChild(elem);
+                    var rel = elem.rel;
+                    if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                        var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                        elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                    }
+                    head.appendChild(elem);
+                }
+            }
+            var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+            var address = protocol + window.location.host + window.location.pathname + '/ws';
+            var socket = new WebSocket(address);
+            socket.onmessage = function(msg) {
+                if (msg.data == 'reload') window.location.reload();
+                else if (msg.data == 'refreshcss') refreshCSS();
+            };
+            console.log('Live reload enabled.');
+        })();
+    }
+    // ]]>
+</script><section id="references" class="appendix"><h2 id="a-references"><bdi class="secno">A. </bdi>References<a class="self-link" aria-label="§" href="#references"></a></h2><section id="normative-references">
+      <h3 id="a-1-normative-references"><bdi class="secno">A.1 </bdi>
+        Normative references
+      <a class="self-link" aria-label="§" href="#normative-references"></a></h3>
+    <dl class="bibliography">
+      <dt id="bib-rfc2119">[RFC2119]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc2119"><cite>Key words for use in RFCs to Indicate Requirement Levels</cite></a>. S. Bradner.  IETF. March 1997. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a></dd><dt id="bib-rfc8174">[RFC8174]</dt><dd><a href="https://www.rfc-editor.org/rfc/rfc8174"><cite>Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words</cite></a>. B. Leiba.  IETF. May 2017. Best Current Practice. URL: <a href="https://www.rfc-editor.org/rfc/rfc8174">https://www.rfc-editor.org/rfc/rfc8174</a></dd>
+    </dl></section></section><p role="navigation" id="back-to-top">
+    <a href="#title"><abbr title="Back to Top">↑</abbr></a>
+  </p><script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script></body></html>
