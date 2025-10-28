@@ -2,15 +2,36 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>OpenActive Club Specification</title>
-    <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer></script>
+    <title>OpenActive Club Specification - Editors Draft</title>
+    <script src="https://www.w3.org/Tools/respec/respec-w3c-common" class="remove" defer>
+    /*This is deprecated - should use line below.
+    <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove" defer>
+    But this adds a latest version, which we don't have,
+    so will migrate when we have propoer published version</script>
     <script class="remove">
         // All config options at https://respec.org/docs/
         var respecConfig = {
             //Document Status
-            specStatus: "unofficial",
-            //Suppress previous version with this line (for new drafts)
-            latestVersion: null,
+            specStatus: "CG-DRAFT",
+            group: "openactive",
+            noRecTrack: true,
+            otherLinks: [
+                {
+                    key: "Latest published version",
+                    value: "0.2",
+                    href: "https://openactive-contrib.github.io/club-specification/0.2/index.html"
+                }
+            ],
+            // if there a publicly available Editor's Draft, this is the link
+            edDraftURI: "https://openactive-contrib.github.io/club-specification/EditorsDraft/draft.html",
+            copyrightStart: 2025,
+            //Suppress previous version with this line
+            //Note: The latestVersion URL is resolved using https://www.w3.org/ as the base URL.
+            //latestVersion: null,
+            //previousMaturity: "UNOFFICIAL",
+            //previousPublishDate: "2025-07-21",
+            github: "https://github.com/openactive-contrib/club-specification",
+
             //Editors
             editors: [{
                 name: "Howard Askew", url: "https://theodi.org/person/howard-askew",
@@ -18,7 +39,7 @@
                 w3cid: 138948
             }],
             //github: "openactive/modelling-opportunity-data/issues/313",
-            shortName: "clubs",
+            //shortName: "clubs",
             xref: "web-platform",
             format: "markdown",
             // name of the WG
@@ -78,6 +99,46 @@
             }
         };
     </script>
+    <style>
+        /*Tidy tables*/
+        table {border-collapse: collapse; border: 1px solid #bec9d9;}
+        td, th {padding: 3px 0.5em; border:1px solid #bec9d9;}
+        tr th[colspan] {color: #005A9C; background-color: #FEEDE2; text-align: center}
+        th {color: #005A9C; background-color: #E2EDFE; font-weight: normal;border-bottom:1px solid #BEC9D9;}
+        tbody tr th {text-align: left;}
+        td.nb { font-size: smaller;}
+        /*Add OA spec image*/
+        html {
+        background-image: none !important;
+            }
+            body {
+        background: white top left fixed no-repeat !important;
+        background-size: 25px auto !important;
+        background-image: url('https://www.openactive.io/assets/openactive-label-specification.png') !important;
+            }
+            h1 {
+        font-family: 'Open Sans',sans-serif !important;
+        font-weight: 300 !important;
+        color: #3B3089 !important;
+        font-size: 220%;
+            }
+            #toc {
+        padding-top: 0px !important;
+            }
+                body {
+        background-size: 25px auto !important;
+            }
+            body.toc-sidebar #toc {
+        background-size: 25px auto !important;
+        background-attachment: fixed !important;
+            }
+            em.rfc2119 {
+                text-transform:     lowercase;
+                font-variant:       small-caps;
+                font-style:         normal;
+                color:              #900;
+            }
+    </style>
 </head>
 <body>
 <section id="abstract">
@@ -97,7 +158,7 @@ The data model described in this document has been mapped to existing standards 
 SKOS and the Schema.org types and properties.
 </section>
 <section id="sotd">
-Contributions to this document are welcomed. Please add any solutions, comments, or improvements you might have via [GitHub](openactive/modelling-opportunity-data/issues/313).
+Contributions to this document are welcomed.
 </section>
 <section>
 ## Introduction
@@ -150,6 +211,7 @@ This would support ongoing publication of up-to-date information about affiliate
 <section>
 ## Data Model
 
+
 ### Describing Organisations
 
 Schema.org’s Organization, SportsClub and SportsOrganization types support a common set of properties to describe the information required:
@@ -158,18 +220,21 @@ Schema.org’s Organization, SportsClub and SportsOrganization types support a c
 | :---- | :---- | :---- | :---- | :---- |
 | name | [schema:name](https://schema.org/name) | REQUIRED | String | The name of the organisation. |
 | description | [schema:description](https://schema.org/description) | Recommended | String | A free text description containing a brief summary of the organisation. |
-| url | [schema:url](https://schema.org/url) | Recommended | String | A URL to the organisation’s website homepage or other page about the organisation. |
-| sameAs | [schema:sameAs](https://schema.org/sameAs) | Recommended | String or array of String | Lists the URL(s) of the official social media profile pages associated with the organisation. |
+| url | [schema:url](https://schema.org/url) | Recommended | String | A URL to the organisation’s website homepage or other page about the organisation.<sup>1</sup>|
+| sameAs | [schema:sameAs](https://schema.org/sameAs) | Recommended | String or array of String | Lists the URL(s) of the official social media profile pages associated with the organisation.<sup>1</sup>|
 | activity | [oa:activity](https://openactive.io/activity) | REQUIRED | Array of [skos:Concept](https://www.w3.org/2009/08/skos-reference/skos.html#Concept) | Specifies one or more physical activities that are provided by the organisation.  |
 | location | [schema:location](https://schema.org/location) | REQUIRED | [schema:Place](https://schema.org/Place) or array of [schema:Place](https://schema.org/Place), [schema: address](https://schema.org/address), String | The main address of the organisation or key locations of the activities provided by the organisation. |
-| email | [schema:email](https://schema.org/email)  | Optional | String | A contact email address for the organisation. |
-| telephone | [schema:telephone](https://schema.org/telephone) | Optional | String | A contact telephone number for the organisation. |
+| email | [schema:email](https://schema.org/email)  | Recommended | String | A contact email address for the organisation.<sup>1</sup> |
+| telephone | [schema:telephone](https://schema.org/telephone) | Recommended | String | A contact telephone number for the organisation.<sup>1</sup> |
 | logo | [schema:logo](https://schema.org/logo) | Optional | [schema:ImageObject](https://schema.org/ImageObject) | A URL to an image associated with the organisation which can be presented alongside its name. |
 | alternateName | [schema:alternativeName](https://schema.org/alternateName) | Optional | String or array of String | Aliases, common acronyms or alternative names for the organisation.  |
 | genderRestriction | [oa:genderRestriction](https://openactive.io/genderRestriction) | Optional | [oa:GenderRestrictionType](https://openactive.io/GenderRestrictionType) | Indicates that an organisation provides activities that are restricted to Male or Female participants, or that there are no restrictions. 3  values are defined as URIs however see [related discussion](https://github.com/openactive/modelling-opportunity-data/issues/69%20).  |
 | ageRange | [oa:ageRange](https://openactive.io/ageRange) | Optional | [schema:QuantitativeValue](https://schema.org/QuantitativeValue) | Indicates that an organisation provides activities suitable for a specific age range. Specified as a [QuantitativeValue](https://schema.org/QuantitativeValue) with [minValue](https://schema.org/minValue) and [maxValue](https://schema.org/maxValue) properties |
 | memberOf | [schema:memberOf](https://schema.org/memberOf) | Optional | String | The Organisation Id for an organisation that this club is affiliated to. For example, a club can link to its National Governing Body. |
 | member | [schema:member](https://schema.org/member) | Optional | String or array of String | The organisation IDs for organisations affiliated to this organisation. For example, a National Governing Body can list its current affiliated clubs. |
+
+<p><sup>1</sup> At least one form of contact information (<code>url</code>, <code>sameAs</code>, <code>email</code>, or <code>telephone</code>) <strong>MUST</strong> be provided for each organisation.</p>
+
 
 ### Describing Activities
 
@@ -405,11 +470,7 @@ The kinds of information included here were identified as valuable by data users
 
 For examples illustrating how to use this specification with club or league management systems, and via real-time paged data exchange (RPDE), look out for forthcoming updates to the OpenActive opportunity specification.
 </section>
-<section>
-## Conformance
-As well as sections marked as non-normative, all authoring guidelines, diagrams, examples, and notes in this specification are non-normative.
-
-The key word REQUIRED in this document is to be interpreted as described in [BCP 14](https://www.rfc-editor.org/info/bcp14) when, and only when, it appears in all capitals, as shown here.
+<section id="conformance">
 </section>
 </body>
 </html>
